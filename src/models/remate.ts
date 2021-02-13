@@ -63,7 +63,6 @@ const getCompradores = async () => {
 
 const createRemate = async (remate: NewRemate) => {
     const retData = await Remate.create(remate);
-    console.log("createRemate: ", retData.toJSON());
     const addedRemate: NewRemate = {
         id: retData.id,
         comprador: retData.comprador,
@@ -105,7 +104,6 @@ const createRemate = async (remate: NewRemate) => {
 }
 
 const updateRemate = async (remate: NewRemate) => {
-    console.log("updateRemate: ", remate);
     const updated = await Remate.update({
         comprador: remate.comprador,
         calle: remate.calle,

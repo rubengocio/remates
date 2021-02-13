@@ -43,6 +43,8 @@
             required
             :clearable="true"
             :cache-items="true"
+            :disabled="readOnly"
+            :filled="readOnly"
             @input="onUpdate"
           ></v-combobox>
         </v-col>
@@ -56,6 +58,8 @@
             required 
             outlined 
             dense 
+            :filled="readOnly"
+            :disabled="readOnly"
             hide-details="auto">
           </v-text-field>
         </v-col>
@@ -66,6 +70,8 @@
             required 
             outlined 
             dense 
+            :filled="readOnly"
+            :disabled="readOnly"
             hide-details="auto">
           </v-text-field>
         </v-col>
@@ -82,6 +88,8 @@
             label="Localidad/Ciudad"
             return-object
             :auto-select-first="true"
+            :filled="readOnly"
+            :disabled="readOnly"
             :clearable="true">
           </v-combobox>
         </v-col>
@@ -94,6 +102,8 @@
             required 
             outlined 
             dense 
+            :filled="readOnly"
+            :disabled="readOnly"
             hide-details="auto">
           </v-text-field>
         </v-col>
@@ -104,6 +114,8 @@
             required 
             outlined 
             dense 
+            :filled="readOnly"
+            :disabled="readOnly"
             hide-details="auto">
           </v-text-field>
         </v-col>
@@ -120,6 +132,8 @@
             label="Ingresos Brutos"
             return-object
             :auto-select-first="true"
+            :disabled="readOnly"
+            :filled="readOnly"
             :clearable="true">
           </v-combobox>
         </v-col>
@@ -132,18 +146,22 @@
             required 
             outlined 
             dense 
+            :filled="readOnly"
+            :disabled="readOnly"
             hide-details="auto">
           </v-text-field>
         </v-col>
       </v-row>
       <v-row>
-        <v-col cols="12" md="3">
+        <v-col cols="12" md="2">
           <v-text-field 
             v-model="item.descripcion" 
             label="Descripcion" 
             required 
             outlined 
             dense 
+            :disabled="readOnly"
+            :filled="readOnly"
             hide-details="auto">
           </v-text-field>
         </v-col>
@@ -154,6 +172,8 @@
             required 
             outlined 
             dense 
+            :disabled="readOnly"
+            :filled="readOnly"
             hide-details="auto">
           </v-text-field>
         </v-col>
@@ -164,6 +184,8 @@
             required 
             outlined 
             dense 
+            :disabled="readOnly"
+            :filled="readOnly"
             hide-details="auto">
           </v-text-field>
         </v-col>
@@ -174,6 +196,8 @@
             required 
             outlined 
             dense 
+            :disabled="readOnly"
+            :filled="readOnly"
             hide-details="auto">
           </v-text-field>
         </v-col>
@@ -184,6 +208,8 @@
             required 
             outlined 
             dense 
+            :disabled="readOnly"
+            :filled="readOnly"
             hide-details="auto"
             @keypress="isDecimal($event, item.cantidad)" 
           ></v-text-field>
@@ -195,6 +221,8 @@
             required 
             outlined 
             dense 
+            :disabled="readOnly"
+            :filled="readOnly"
             hide-details="auto">
           </v-text-field>
         </v-col>
@@ -205,6 +233,9 @@
             required 
             outlined 
             dense 
+            :disabled="readOnly"
+            :filled="readOnly"
+            @keypress="isDecimal($event, item.rp)"
             hide-details="auto">
           </v-text-field>
         </v-col>
@@ -215,22 +246,37 @@
             required 
             outlined 
             dense 
+            :disabled="readOnly"
+            :filled="readOnly"
+            @keypress="isDecimal($event, item.precioUnitario)"
             hide-details="auto">
           </v-text-field>
         </v-col>
-        <v-col cols="12" md="1">
+        <v-col cols="12" md="2">
           <v-text-field 
             v-model="item.importe" 
             @keypress="isDecimal($event, item.importe)" 
-            label="IMPORTE" 
+            label="Importe" 
             required 
             outlined 
             dense 
+            :disabled="readOnly"
+            :filled="readOnly"
             hide-details="auto"
           ></v-text-field>
         </v-col>
          <v-col cols="12" md="1">
-          <v-btn color="success" class="mr-4" @click="addItem">Agregar</v-btn>
+          <!--<v-btn color="success" class="mr-4" @click="addItem">Agregar</v-btn>-->
+          <v-btn 
+            color="success" 
+            fab 
+            small 
+            dark 
+            :disabled="readOnly"
+            :filled="readOnly"
+            @click="addItem">
+            <v-icon>mdi-plus</v-icon>
+          </v-btn>
         </v-col>
       </v-row>
       <v-row>
@@ -241,6 +287,8 @@
           :items="remate.items"
           :items-per-page="5"
           class="elevation-1"
+          :disabled="readOnly"
+          :filled="readOnly"
         >
         </v-data-table>
         </v-col>
@@ -248,9 +296,12 @@
       <v-row>
         <v-col cols="12" md="4">
           <v-textarea 
-            outlined name="input-7-4" 
+            outlined 
+            name="input-7-4" 
             label="Forma de pago" 
             v-model="remate.formaPago" 
+            :disabled="readOnly"
+            :filled="readOnly"
             rows="24">
           </v-textarea>
         </v-col>
@@ -284,6 +335,8 @@
                 outlined 
                 dense 
                 hide-details="auto" 
+                :disabled="readOnly"
+                :filled="readOnly"
                 @keypress="isDecimal($event, remate.comisionPorcentaje)" 
                 label="Comision %">
               </v-text-field>
@@ -312,6 +365,8 @@
                 dense 
                 hide-details="auto" 
                 label="Fondo Compensatorio $"
+                :disabled="readOnly"
+                :filled="readOnly"
                 @keypress="isDecimal($event, remate.fondoCompensatorioImporte)" 
               ></v-text-field>
             </v-col>
@@ -338,6 +393,8 @@
                 outlined 
                 dense 
                 hide-details="auto" 
+                :disabled="readOnly"
+                :filled="readOnly"
                 @keypress="isDecimal($event, remate.atencionHaciendaImporte)"
                 label="Atención Hacienda $">
               </v-text-field>
@@ -365,6 +422,8 @@
                 outlined 
                 dense 
                 hide-details="auto" 
+                :disabled="readOnly"
+                :filled="readOnly"
                 @keypress="isDecimal($event, remate.movimientosImporte)"
                 label="Movimientos $">
               </v-text-field>
@@ -377,7 +436,8 @@
                 dense 
                 hide-details="auto" 
                 @keypress="isDecimal($event, remate.movimientosTotal)"
-                filled disabled>
+                filled 
+                disabled>
               </v-text-field>
             </v-col>
           </v-row>
@@ -391,6 +451,8 @@
                 outlined 
                 dense 
                 hide-details="auto" 
+                :disabled="readOnly"
+                :filled="readOnly"
                 @keypress="isDecimal($event, remate.otrosImporte)"
                 label="Otros $">
               </v-text-field>
@@ -418,6 +480,8 @@
                 outlined 
                 dense 
                 hide-details="auto" 
+                :disabled="readOnly"
+                :filled="readOnly"
                 @keypress="isDecimal($event, remate.tasaMunicipalImporte)"
                 label="Tasa Municipal $">
               </v-text-field>
@@ -445,6 +509,8 @@
                 outlined 
                 dense 
                 hide-details="auto" 
+                :disabled="readOnly"
+                :filled="readOnly"
                 @keypress="isDecimal($event, remate.senasaImporte)"
                 label="SENASA $">
               </v-text-field>
@@ -488,6 +554,8 @@
                 outlined 
                 dense 
                 hide-details="auto" 
+                :disabled="readOnly"
+                :filled="readOnly"
                 @keypress="isDecimal($event, remate.ivaInscriptoPorcentaje)"
                 label="I.V.A Insc. %">
               </v-text-field>
@@ -499,6 +567,8 @@
                 outlined 
                 dense 
                 hide-details="auto" 
+                :disabled="readOnly"
+                :filled="readOnly"
                 @keypress="isDecimal($event, remate.ivaInscriptoImporte)"
                 label="I.V.A Insc. $">
               </v-text-field>
@@ -523,6 +593,8 @@
                 outlined 
                 dense 
                 hide-details="auto" 
+                :disabled="readOnly"
+                :filled="readOnly"
                 @keypress="isDecimal($event, remate.ivaNoInsciptoPorcentaje)"
                 label="I.V.A No Insc. %">
               </v-text-field>
@@ -534,6 +606,8 @@
                 outlined 
                 dense 
                 hide-details="auto" 
+                :disabled="readOnly"
+                :filled="readOnly"
                 @keypress="isDecimal($event, remate.ivaNoInscriptoImporte)"
                 label="I.V.A No Insc. $">
               </v-text-field>
@@ -559,6 +633,8 @@
                 outlined 
                 dense 
                 hide-details="auto" 
+                :disabled="readOnly"
+                :filled="readOnly"
                 @keypress="isDecimal($event, remate.resolPorcentaje)"
                 label="Resol %">
               </v-text-field>
@@ -570,6 +646,8 @@
                 outlined 
                 dense 
                 hide-details="auto" 
+                :disabled="readOnly"
+                :filled="readOnly"
                 @keypress="isDecimal($event, remate.resolImporte)"
                 label="Resol $">
               </v-text-field>
@@ -623,7 +701,7 @@
     </v-container>
     <SearchRemate 
       @close="closeSearchRemates"
-      @edit="editarRemate"
+      @ver="verRemate"
       :dialog="searchRemates">
     
     </SearchRemate>
@@ -677,7 +755,8 @@ export default {
         resolPorcentaje: null,
         resolImporte: null,
         resolTotal: null,
-        total: null
+        total: null,
+        items: []
       },
 
       item: {
@@ -713,7 +792,8 @@ export default {
       compradorList: [],
       ciudadList: [],
       ingresosBrutosList: [],
-      searchRemates: false
+      searchRemates: false,
+      readOnly: true
     };
   },
 
@@ -727,10 +807,11 @@ export default {
       this.searchRemates = false;
     },
 
-    editarRemate (remate){
-      console.log("editarRemate: ", remate);
-      this.modificar();
+    verRemate (remate){
+      console.log("verRemate: ", remate);
       this.remate = remate;
+      this.readOnly = true;
+      this.btnDisabled(false, false, false, false, true, true);
     },
 
     btnDisabled: function(btnNuevo, btnModificar, btnEliminar, btnImprimir, btnGuardar, btnCancelar){
@@ -743,21 +824,25 @@ export default {
     },
 
     nuevo: function(){
+      this.readOnly = false;
       this.btnDisabled(true, true, true, true, false, false);
       this.clearRemate();
     },
 
     modificar (){
+      this.readOnly = false;
       this.btnDisabled(true, true, true, false, false, false);
     },
 
     cancelar: function(){
+      this.readOnly = true;
       this.btnDisabled(false, true, true, true, true, true);
       this.clearRemate();
     },
 
     addItem: function(){
       if(this.item != null) {
+        console.log("addItem: ", this.item);
         this.remate.items.push(this.item);
       }
       this.clearItem();
@@ -800,7 +885,8 @@ export default {
         resolPorcentaje: null,
         resolImporte: null,
         resolTotal: null,
-        total: null
+        total: null,
+        items: []
       }
     },
 
@@ -848,9 +934,9 @@ export default {
           console.log("createRemate: ", result);
         });
       }
-      this.btnDisabled(true, false, false, false, true, true);
-      //this.cancelar();
-      //this.cargarCompradores();
+      this.btnDisabled(false, false, false, false, true, true);
+      this.readOnly = true;
+      this.cargarCompradores();
     },
 
     addCompradorList: function(item, i, e){
@@ -872,10 +958,14 @@ export default {
       evt = evt ? evt : window.event;
       const charCode = evt.which ? evt.which : evt.keyCode;
       console.log("isDecimal: ", charCode);
-      if( text != null && text.indexOf('.') >= 0 && charCode === 46){
+      if( text != null 
+        && text.indexOf(".") >= 0 
+        && charCode === 46){
         evt.preventDefault();
       }
-      if(text != null && text.indexOf('.') >= 0 && (text.length - text.indexOf('.')) > 2){
+      if(text != null 
+          && text.indexOf(".") >= 0 
+          && (text.length - text.indexOf(".")) > 2){
         evt.preventDefault();
       }
       if (

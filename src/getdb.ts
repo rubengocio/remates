@@ -5,23 +5,20 @@ declare const __static: string;
 
 // todo try loading db from userData
 
-const univDb = path.join(remote.app.getPath("userData"), "data.db")
-console.log("univDb: ", univDb);
-
 const isBuild = process.env.NODE_ENV === 'production';
 const locDb = path.join(
     // eslint-disable-next-line
     isBuild ? __dirname : __static,
     '../src/data.db',
 );
- 
+
 console.log("locDb: ", locDb);
 
 // setup the connection to make sure it works
 const sequelize = new Sequelize({
     dialect: 'sqlite',
     // todo change this to locDb for using db inside src/data.db
-    storage: isBuild? univDb: locDb,
+    storage: locDb,
     // ** db event logging true in dev and false in production
     define: {
         timestamps: false,

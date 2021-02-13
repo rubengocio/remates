@@ -55,14 +55,13 @@
               </template>
               <template v-slot:item.actions="{ item }">
                 <v-icon
-                  small
                   class="mr-2"
-                  @click="editarRemate(item)"
+                  @click="verRemate(item)"
                 >
-                  mdi-pencil
+                  mdi-arrow-right-bold-circle
                 </v-icon>
                 <v-icon
-                  small
+                  color="red"
                   @click="eliminarRemate(item)"
                 >
                   mdi-delete
@@ -121,9 +120,9 @@
     },
 
     methods: {
-      editarRemate (remate){
-        console.log("editRemate: ", remate);
-        this.$emit("edit", remate);
+      verRemate (remate){
+        console.log("verRemate: ", remate);
+        this.$emit("ver", remate);
         this.close();
       },
 
