@@ -1,4 +1,4 @@
-import { Remate } from "../getdb";
+import { Item, Remate } from "../getdb";
 
 interface NewRemate{
     id?: number | null;
@@ -36,17 +36,25 @@ interface NewRemate{
     resolImporte: string| null;
     resolTotal: string| null;
     total: string| null;
+    items: Item[]| null;
 }
 
-const getRemates = async () => {
-    const remates = await Remate.findAll();
-    return remates;
+const getRemates = () => {
+    return Remate.findAll({
+        include: ["items"],
+    }).then((remates) => {
+        return remates;
+    }).catch((err) => {
+        console.log(">> Error while retrieving remates: ", err);
+    });
 }
 
-const eliminarRemate = async (id: number) => {
+
+
+const eliminarRemate = async (remateId: number) => {
     const result = await Remate.destroy({
         where: {
-            id: id
+            "id": remateId
         },
         force: true
     });
@@ -98,7 +106,8 @@ const createRemate = async (remate: NewRemate) => {
         resolPorcentaje: retData.resolPorcentaje,
         resolImporte: retData.resolImporte,
         resolTotal: retData.resolTotal,
-        total: retData.total
+        total: retData.total,
+        items: remate.items
     }
     return addedRemate;
 }

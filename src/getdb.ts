@@ -2,15 +2,17 @@ import { remote } from "electron";
 import path from 'path';
 import { DataTypes, Model, Sequelize } from 'sequelize';
 declare const __static: string;
-
 // todo try loading db from userData
 
 const isBuild = process.env.NODE_ENV === 'production';
-const locDb = path.join(
-    // eslint-disable-next-line
-    isBuild ? __dirname : __static,
-    '../src/data.db',
-);
+
+let locDb = '';
+
+if(isBuild){
+    locDb = path.join('', './data.db');
+}else{
+    locDb = path.join(__static, '../src/data.db');
+}
 
 console.log("locDb: ", locDb);
 
@@ -26,77 +28,71 @@ const sequelize = new Sequelize({
     },
 });
 
-// todo define models here, or use a separate file for defining models and import them here!!!
-class User extends Model {
-    public firstName!: string | null;
-    public lastName!: string | null;
-    public id!: number | null
+class Item extends Model {
+    public id!: number | null;
+    public hash!: string | null;
+    public descripcion!: string | null;
+    public boleto!: string | null;
+    public corr!: string | null;
+    public lote!: string | null;
+    public cantidad!: string | null;
+    public especie!: string | null;
+    public rp!: string | null;
+    public precioUnitario!: string | null;
+    public importe!: string | null;
+    public remateId!: number | null;
 }
-User.init({
-    firstName: {
-        type: DataTypes.STRING,
-        allowNull: false
+Item.init({
+    id: {
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+        type: DataTypes.INTEGER
     },
-    lastName: {
+    hash: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: true
     },
-
-}, {
-    tableName: "users",
-    sequelize
-});
-
-// todo use sync to create tables 
-User.sync();
-
-class Comprador extends Model {
-    public name!: string | null;
-    public id!: number | null
-}
-Comprador.init({
-    name: {
+    descripcion: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: true
+    },
+    boleto: {
+        type: DataTypes.STRING,
+        allowNull: true
+    },
+    corr: {
+        type: DataTypes.STRING,
+        allowNull: true
+    },
+    lote: {
+        type: DataTypes.STRING,
+        allowNull: true
+    },
+    cantidad: {
+        type: DataTypes.STRING,
+        allowNull: true
+    },
+    especie: {
+        type: DataTypes.STRING,
+        allowNull: true
+    },
+    rp: {
+        type: DataTypes.STRING,
+        allowNull: true
+    },
+    precioUnitario: {
+        type: DataTypes.STRING,
+        allowNull: true
+    },
+    importe: {
+        type: DataTypes.STRING,
+        allowNull: true
     }
 }, {
-    tableName: "comprador",
+    tableName: "item",
     sequelize
 });
-
-Comprador.sync();
-
-class Ciudad extends Model {
-    public name!: string | null;
-    public id!: number | null
-}
-Ciudad.init({
-    name: {
-        type: DataTypes.STRING,
-        allowNull: false
-    }
-}, {
-    tableName: "ciudad",
-    sequelize
-});
-
-Ciudad.sync();
-
-class IngresosBrutos extends Model {
-    public name!: string | null;
-    public id!: number | null
-}
-IngresosBrutos.init({
-    name: {
-        type: DataTypes.STRING,
-        allowNull: false
-    }
-}, {
-    tableName: "ingresos_brutos",
-    sequelize
-});
-
-IngresosBrutos.sync();
 
 class Remate extends Model {
     public id!: number | null;
@@ -284,6 +280,10 @@ Remate.init({
     sequelize
 });
 
+Remate.hasMany(Item, {as: 'items'});
+Item.belongsTo(Remate, {foreignKey: 'remateId'});
+
+Item.sync();
 Remate.sync();
 
-export { sequelize, User, Comprador, Ciudad, IngresosBrutos, Remate };
+export { sequelize, Remate, Item };

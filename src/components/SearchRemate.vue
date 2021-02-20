@@ -76,6 +76,7 @@
 
 <script>
   import { getRemates, eliminarRemate} from "../models/remate";
+import { eliminarItems } from "../models/item";
 
   export default {
     data () {
@@ -152,8 +153,17 @@
       },
 
       deleteItemConfirm () {
-        if(this.remate != null){
-          eliminarRemate(this.remate.id).then((data) => {
+        if(this.remate != null && this.remate.id != null){
+          const remateId = this.remate.id;
+          eliminarItems(remateId).then((item) => {
+            eliminarRemate(remateId).then((data) => {
+              console.log("remate eliminado");
+            }).catch((err) => {
+              console.log("error al eliminar remate");
+            });
+          }).catch((err) => {
+            console.log("error al eliminar items");
+          }).finally(() => {
             this.remate = null;
             this.fillRemates();
           });
