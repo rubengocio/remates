@@ -49,7 +49,7 @@ export default {
       finalY += alto;
       
       doc.autoTable({
-        head: [['Descripcion', 'Boleto', 'Corr.', 'Cant', 'Especie', 'RP', 'Prec. Unit.', 'Importe']],
+        head: [['Descripcion', 'Boleto', 'Corr.', 'Lote', 'Cant', 'Especie', 'RP', 'Prec. Unit.', 'Importe']],
         body: this.getItems(this.remate),
         startY: finalY ,
       });
