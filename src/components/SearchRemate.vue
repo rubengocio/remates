@@ -76,7 +76,7 @@
 
 <script>
   import { getRemates, eliminarRemate} from "../models/remate";
-import { eliminarItems } from "../models/item";
+import { eliminarItems, getItems } from "../models/item";
 
   export default {
     data () {
@@ -122,13 +122,14 @@ import { eliminarItems } from "../models/item";
 
     methods: {
       verRemate (remate){
-        console.log("verRemate: ", remate);
-        this.$emit("ver", remate);
-        this.close();
+        getItems(remate.id).then((result) =>{
+          remate.items = result;
+          this.$emit("ver", remate);
+          this.close();
+        });
       },
 
       eliminarRemate (remate){
-        console.log("deleteRemate: ", remate);
         this.remate = remate;
         this.dialogDelete = true;
       },
