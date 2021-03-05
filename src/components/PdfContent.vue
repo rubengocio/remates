@@ -38,12 +38,12 @@ export default {
       doc.text('Comprador: ' + this.getString(this.remate.comprador), 40, finalY);
       finalY += alto + saltoDeLinea;
       doc.text('Calle: ' + this.getString(this.remate.calle), 40, finalY);
-      doc.text('Nro: ' + this.getString(this.remate.numero), 250, finalY);
-      doc.text('Localidad: ' + this.getString(this.remate.localidad), 350, finalY);
+      doc.text('Nro: ' + this.getString(this.remate.numero), 280, finalY);
+      doc.text('Localidad: ' + this.getString(this.remate.localidad), 360, finalY);
       finalY += alto + saltoDeLinea;
       doc.text('Telefono: ' + this.getString(this.remate.telefono), 40, finalY);
       doc.text('C.U.I.T.: ' + this.getString(this.remate.cuit), 200, finalY);
-      doc.text('Ingresos Brutos: ' + this.getString(this.remate.ingresosBrutos), 350, finalY);
+      doc.text('Ingresos Brutos: ' + this.getString(this.remate.ingresosBrutos), 360, finalY);
       finalY += alto + saltoDeLinea;
       doc.text('RENSPA N°: ' + this.getString(this.remate.renspa), 40, finalY);
       finalY += alto;
@@ -59,110 +59,98 @@ export default {
       finalY += alto;
       finalY = this.addPage(doc, finalY, alto, marginTop);
       doc.text('Forma de pago', 40, finalY);
-      doc.text('Importe $', 500, finalY);
+      doc.text('Importe $', 450, finalY);
+      doc.text('' + this.getString(this.remate.importe), 500, finalY);
       
       finalY += alto;
       finalY = this.addPage(doc, finalY, alto, marginTop);
       const formaDePago = this.setFormaDePago(doc, this.getString(this.remate.formaPago), 40, finalY);
-      doc.text('' + this.getString(this.remate.importe), 500, finalY);
       
       finalY += alto + saltoDeLinea;
       finalY = this.addPage(doc, finalY, alto, marginTop);
-      doc.text('Comision %', 350, finalY);
-      finalY += alto;
+      doc.text('Comision %', 365, finalY);
       finalY = this.addPage(doc, finalY, alto, marginTop);
-      doc.text('' + this.getString(this.remate.comisionPorcentaje), 350, finalY);
+      doc.text('' + this.getString(this.remate.comisionPorcentaje), 430, finalY);
       doc.text('' + this.getString(this.remate.comisionTotal), 500, finalY);
 
       finalY += alto + saltoDeLinea;
       finalY = this.addPage(doc, finalY, alto, marginTop);
-      doc.text('Fondo Compensatorio $', 350, finalY);
-      finalY += alto;
+      doc.text('Fondo Compensatorio $', 310, finalY);
       finalY = this.addPage(doc, finalY, alto, marginTop);
-      doc.text('' + this.getString(this.remate.fondoCompensatorioImporte), 350, finalY);
+      doc.text('' + this.getString(this.remate.fondoCompensatorioImporte), 430, finalY);
       doc.text('' + this.getString(this.remate.fondoCompensatorioTotal), 500, finalY);
 
       finalY += alto + saltoDeLinea;
       finalY = this.addPage(doc, finalY, alto, marginTop);
-      doc.text('Atención Hacienda $', 350, finalY);
-      finalY += alto;
+      doc.text('Atención Hacienda $', 325, finalY);
       finalY = this.addPage(doc, finalY, alto, marginTop);
-      doc.text('' + this.getString(this.remate.atencionHaciendaImporte), 350, finalY);
+      doc.text('' + this.getString(this.remate.atencionHaciendaImporte), 430, finalY);
       doc.text('' + this.getString(this.remate.atencionHaciendaTotal), 500, finalY);
 
       finalY += alto + saltoDeLinea;
       finalY = this.addPage(doc, finalY, alto, marginTop);
-      doc.text('Movimientos $', 350, finalY);
-      finalY += alto;
+      doc.text('Movimientos $', 353, finalY);
       finalY = this.addPage(doc, finalY, alto, marginTop);
-      doc.text('' + this.getString(this.remate.movimientosImporte), 350, finalY);
+      doc.text('' + this.getString(this.remate.movimientosImporte), 430, finalY);
       doc.text('' + this.getString(this.remate.movimientosTotal), 500, finalY);
 
       finalY += alto + saltoDeLinea;
       finalY = this.addPage(doc, finalY, alto, marginTop);
-      doc.text('Otros $', 350, finalY);
-      finalY += alto;
+      doc.text('Otros $', 385, finalY);
       finalY = this.addPage(doc, finalY, alto, marginTop);
-      doc.text('' + this.getString(this.remate.otrosImporte), 350, finalY);
+      doc.text('' + this.getString(this.remate.otrosImporte), 430, finalY);
       doc.text('' + this.getString(this.remate.otrosTotal), 500, finalY);
 
       finalY += alto + saltoDeLinea;
       finalY = this.addPage(doc, finalY, alto, marginTop);
-      doc.text('Tasa Municipal $', 350, finalY);
-      finalY += alto;
+      doc.text('Tasa Municipal $', 342, finalY);
       finalY = this.addPage(doc, finalY, alto, marginTop);
-      doc.text('' + this.getString(this.remate.tasaMunicipalImporte), 350, finalY);
+      doc.text('' + this.getString(this.remate.tasaMunicipalImporte), 430, finalY);
       doc.text('' + this.getString(this.remate.tasaMunicipalTotal), 500, finalY);
 
       finalY += alto + saltoDeLinea;
       finalY = this.addPage(doc, finalY, alto, marginTop);
-      doc.text('SENASA $', 350, finalY);
-      finalY += alto;
+      doc.text('SENASA $', 369, finalY);
       finalY = this.addPage(doc, finalY, alto, marginTop);
-      doc.text('' + this.getString(this.remate.senasaImporte), 350, finalY);
+      doc.text('' + this.getString(this.remate.senasaImporte), 430, finalY);
       doc.text('' + this.getString(this.remate.senasaTotal), 500, finalY);
 
       finalY += alto + saltoDeLinea;
       finalY = this.addPage(doc, finalY, alto, marginTop);
-      doc.text('Sub-Total $', 500, finalY);
-      finalY += alto;
+      doc.text('Sub-Total $', 430, finalY);
       finalY = this.addPage(doc, finalY, alto, marginTop);
       doc.text('' + this.getString(this.remate.subTotal), 500, finalY);
 
       finalY += alto + saltoDeLinea;
       finalY = this.addPage(doc, finalY, alto, marginTop);
-      doc.text('I.V.A Insc. %', 250, finalY);
-      doc.text('I.V.A Insc. $', 350, finalY);
-      finalY += alto;
+      doc.text('I.V.A Insc. %', 235, finalY);
+      doc.text('I.V.A Insc. $', 363, finalY);
       finalY = this.addPage(doc, finalY, alto, marginTop);
-      doc.text('' + this.getString(this.remate.ivaInscriptoPorcentaje), 250, finalY);
-      doc.text('' + this.getString(this.remate.ivaInscriptoImporte), 350, finalY);
+      doc.text('' + this.getString(this.remate.ivaInscriptoPorcentaje), 300, finalY);
+      doc.text('' + this.getString(this.remate.ivaInscriptoImporte), 430, finalY);
       doc.text('' + this.getString(this.remate.ivaInscriptoTotal), 500, finalY);
 
       finalY += alto + saltoDeLinea;
       finalY = this.addPage(doc, finalY, alto, marginTop);
-      doc.text('I.V.A No Insc. %', 250, finalY);
-      doc.text('I.V.A No Insc. $', 350, finalY);
-      finalY += alto;
+      doc.text('I.V.A No Insc. %', 220, finalY);
+      doc.text('I.V.A No Insc. $', 347, finalY);
       finalY = this.addPage(doc, finalY, alto, marginTop);
-      doc.text('' + this.getString(this.remate.ivaNoInscriptoPorcentaje), 250, finalY);
-      doc.text('' + this.getString(this.remate.ivaNoInscriptoImporte), 350, finalY);
+      doc.text('' + this.getString(this.remate.ivaNoInscriptoPorcentaje), 300, finalY);
+      doc.text('' + this.getString(this.remate.ivaNoInscriptoImporte), 430, finalY);
       doc.text('' + this.getString(this.remate.ivaNoInscriptoTotal), 500, finalY);
 
       finalY += alto + saltoDeLinea;
       finalY = this.addPage(doc, finalY, alto, marginTop);
-      doc.text('Resol %', 250, finalY);
-      doc.text('Resol $', 350, finalY);
-      finalY += alto;
+      doc.text('Resol %', 255, finalY);
+      doc.text('Resol $', 382, finalY);
       finalY = this.addPage(doc, finalY, alto, marginTop);
-      doc.text('' + this.getString(this.remate.resolPorcentaje), 250, finalY);
-      doc.text('' + this.getString(this.remate.resolImporte), 350, finalY);
+      doc.text('' + this.getString(this.remate.resolPorcentaje), 300, finalY);
+      doc.text('' + this.getString(this.remate.resolImporte), 430, finalY);
       doc.text('' + this.getString(this.remate.resolTotal), 500, finalY);
 
       finalY += alto + saltoDeLinea;
       finalY = this.addPage(doc, finalY, alto, marginTop);
-      doc.text('Total $', 500, finalY);
-      finalY += alto;
+      doc.text('Total $', 450, finalY);
       finalY = this.addPage(doc, finalY, alto, marginTop);
       doc.text('' + this.getString(this.remate.total), 500, finalY);
 
