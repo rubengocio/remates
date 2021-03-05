@@ -1172,6 +1172,30 @@ export default {
     onUpdateComprador($event) {
       console.info('updated combo:', $event);
       this.remate.comprador = $event;
+      getRemates().then((data) => {
+        let exists = false;
+        data.forEach(remate => {
+          if(remate.comprador != null && remate.comprador == $event){
+            this.remate.calle = remate.calle;
+            this.remate.numero = remate.numero;
+            this.remate.localidad = remate.localidad;
+            this.remate.telefono = remate.telefono;
+            this.remate.cuit = remate.cuit;
+            this.remate.ingresosBrutos = remate.ingresosBrutos;
+            this.remate.renspa = remate.renspa;
+            exists = true;
+          }
+        });
+        if(!exists){
+          this.remate.calle = "";
+          this.remate.numero = "";
+          this.remate.localidad = "";
+          this.remate.telefono = "";
+          this.remate.cuit = "";
+          this.remate.ingresosBrutos = "";
+          this.remate.renspa = "";
+        }
+      });
     },
 
     onUpdateLocalidad($event) {
